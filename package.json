@@ -1,0 +1,20 @@
+{
+  "name": "lptask",
+  "productName": "LPTask",
+  "version": "1.0.0",
+  "description": "เว็บแอปพลิเคชันจัดการงานและตารางเวลา (To-Do List & Task Manager) ที่ออกแบบมาในธีมท้องฟ้า (Sky) สบายตา ใช้งานง่าย และสามารถบันทึกข้อมูลไว้ในเครื่องได้โดยไม่ต้องใช้ฐานข้อมูลภายนอก",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --windows",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^42.3.0",
+    "electron-builder": "^26.8.1"
+  }
+}

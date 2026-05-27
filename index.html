@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>☁️ <span class="gradient-text">LPTask</span></h2>
+            </div>
+            <nav>
+                <button class="nav-btn active" onclick="switchView('list')">📝 รายการงาน</button>
+                <button class="nav-btn" onclick="switchView('calendar')">📅 ปฏิทิน</button>
+                <button class="nav-btn" onclick="switchView('completed')">✅ งานที่สำเร็จแล้ว</button>
+            </nav>
+            
+            <div class="categories-section">
+                <h3>หมวดหมู่ <button class="add-icon" onclick="openCategoryModal()">+</button></h3>
+                <div id="categoryList"></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1 id="viewTitle">📝 <span class="gradient-text">รายการงานทั้งหมด</span></h1>
+                <button class="primary-btn" onclick="openAddTaskModal()">+ เพิ่มงานใหม่</button>
+            </header>
+
+            <!-- List View -->
+            <section id="listView" class="view-section active">
+                <div id="tasksContainer" class="tasks-container"></div>
+            </section>
+
+            <!-- Calendar View -->
+            <section id="calendarView" class="view-section">
+                <div class="calendar-header">
+                    <button onclick="changeMonth(-1)">◀</button>
+                    <h2 id="monthYearDisplay"></h2>
+                    <button onclick="changeMonth(1)">▶</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="day-name">อา.</div><div class="day-name">จ.</div>
+                    <div class="day-name">อ.</div><div class="day-name">พ.</div>
+                    <div class="day-name">พฤ.</div><div class="day-name">ศ.</div>
+                    <div class="day-name">ส.</div>
+                </div>
+                <div id="calendarDays" class="calendar-days"></div>
+            </section>
+
+            <!-- Completed View -->
+            <section id="completedView" class="view-section">
+                <div id="completedTasksContainer" class="tasks-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal เพิ่มหมวดหมู่ -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <h2 id="categoryModalTitle">สร้างหมวดหมู่ใหม่</h2>
+            <input type="text" id="catName" placeholder="ชื่อหมวดหมู่">
+            <input type="color" id="catColor" value="#87CEEB">
+            <div class="modal-actions">
+                <button onclick="closeModals()">ยกเลิก</button>
+                <button class="primary-btn" id="saveCategoryBtn" onclick="saveCategory()">บันทึก</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal เพิ่มงาน -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <h2 id="taskModalTitle">เพิ่มงานใหม่</h2>
+            <input type="text" id="taskTitle" placeholder="ชื่องาน" required>
+            
+            <div class="form-row">
+                <input type="date" id="taskDate">
+                <input type="time" id="taskTime">
+            </div>
+
+            <select id="taskCategory">
+                <option value="">-- ไม่เลือกหมวดหมู่ --</option>
+            </select>
+
+            <div class="priority-selector">
+                <label>ความสำคัญ:</label>
+                <label><input type="radio" name="priority" value="red"> 🔴 มาก</label>
+                <label><input type="radio" name="priority" value="yellow" checked> 🟡 ปกติ</label>
+                <label><input type="radio" name="priority" value="green"> 🟢 น้อย</label>
+            </div>
+
+            <div class="modal-actions">
+                <button onclick="closeModals()">ยกเลิก</button>
+                <button class="primary-btn" id="saveTaskBtn" onclick="saveTask()">บันทึกงาน</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal แสดงงานในแต่ละวัน -->
+    <div id="dayTasksModal" class="modal">
+        <div class="modal-content">
+            <h2 id="dayTasksModalTitle"></h2>
+            <div id="dayTasksList" class="tasks-container">
+                <!-- Tasks for the selected day will be rendered here -->
+            </div>
+            <div class="modal-actions">
+                <button onclick="closeModals()">ปิด</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
